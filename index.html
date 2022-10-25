@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <img src="./assets/logo.png" alt="Logo Bate-Papo UOL">
+      <div class="menu-button">
+        <ion-icon name="people"></ion-icon>
+      </div>
+    </header>
+    <div class="message status">
+      <span class="time">(09:21:45)</span>
+      <p><span class="name">João</span> entra na sala...</p>
+    </div>
+    <div class="message all">
+      <span class="time">(09:22:28)</span>
+      <p><span class="name">João</span> para <span class="name">Todos</span>: Bom dia</p>
+    </div>
+    <div class="message all">
+      <span class="time">(09:22:38)</span>
+      <p><span class="name">Maria</span> para <span class="name">João</span> Oi João :)</p>
+    </div>
+    <div class="message private">
+      <span class="time">(09:22:48)</span>
+      <p><span class="name">João</span> reservadamente para <span class="name">Maria</span>: Oi gatinha quer tc?</p>
+    </div>
+    <div class="message status">
+      <span class="time">(09:22:58)</span>
+      <p><span class="name">Maria</span> sai da sala...</p>
+    </div>
+    <footer class="footer">
+      <div class="message-field">
+        <input type="text">
+        <p class="message-status"></p>
+      </div>
+      <ion-icon name="paper-plane-outline"></ion-icon>
+    </footer>
+  </div>
+  <nav class="menu">
+    <div class="menu-header">
+      <p>Escolha um contato para enviar mensagem:</p>
+    </div>
+    <ul class="contacts">
+      <div class="category all">
+        <ion-icon name="people"></ion-icon>
+        <p>Todos</p>
+      </div>
+      <li class="contact">
+        <ion-icon name="person-circle"></ion-icon>
+        <p>João</p>
+      </li>
+      <li class="contact private-contact">
+        <ion-icon name="person-circle"></ion-icon>
+        <p>Maria</p>
+        <ion-icon name="checkmark"></ion-icon>
+      </li>
+    </ul>
+    <p>Escolha a Visibilidade</p>
+    <ul class="visibility-menu">
+      <li class="visibility-item">
+        <ion-icon name="lock-open"></ion-icon>
+        <p>Público</p>
+      </li>
+      <li class="visibility-item">
+        <ion-icon name="lock-closed"></ion-icon>
+        <p>Reservadamente</p>
+        <ion-icon name="checkmark"></ion-icon>
+      </li>
+    </ul>
+  </nav>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
