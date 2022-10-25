@@ -48,17 +48,14 @@ html {
   padding: 10px 9px;
   border-radius: 2px;
   font-size: 14px;
+  background-color: #ffffff;
 }
 
 .message.status {
   background-color: #dcdcdc;
 }
 
-.message.all {
-  background-color: #ffffff;
-}
-
-.message.private {
+.message.private_message {
   background-color: #FFDEDE;
 }
 
