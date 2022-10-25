@@ -2,6 +2,8 @@ let loginStatus;
 const menuContainer = document.querySelector('.menu-container');
 const menu = document.querySelector('.menu');
 const messagesContainer = document.querySelector('.messages')
+const messageInput = document.querySelector('input')
+const sendMessageButton = document.querySelector('.send-button')
 
 const openMenu = () => {
   menuContainer.classList.remove('no-show');
@@ -17,7 +19,7 @@ const createMessageHTML = (time, from, to, type, text) => {
     </div>`;
   } else {
     messageHTML = `<div class="message ${type === 'message' && ''}">
-    <p><span class="time">(${time})</span> <span class="name">${from}</span> para <span class="name">${to}</span> ${text}</p>
+    <p><span class="time">(${time})</span> <span class="name">${from}</span> para <span class="name">${to}</span>: ${text}</p>
     </div>`
   }
 
@@ -25,8 +27,8 @@ const createMessageHTML = (time, from, to, type, text) => {
 };
 
 
-// login();
-// const connectionInterval = setInterval(keepConnection, 5000);
+login();
+const connectionInterval = setInterval(keepConnection, 5000);
 
 const printMessages = async () => {
   const messages = await getMessages();
@@ -39,3 +41,25 @@ const printMessages = async () => {
 }
 
 printMessages()
+
+//TODO: Comparar arrays de mensagem atual novo acesso na API.
+//TODO: Filtrar mensagens para aparecer apenas para todos e para o usuário.
+
+
+const handleSendClick = async () => {
+  const input = messageInput.value
+  if (!input) return
+
+  const messageStatus = await sendMessage('Todos', input)
+
+  if (messageStatus === 200) {
+    messageInput.value = ''
+    return
+  }
+
+  if (messageStatus === 400) {
+    alert('Você foi desconectado')
+    window.location.reload()
+    return
+  }
+}

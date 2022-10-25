@@ -49,6 +49,7 @@ html {
   border-radius: 2px;
   font-size: 14px;
   background-color: #ffffff;
+  line-break: anywhere;
 }
 
 .message.status {
@@ -110,6 +111,10 @@ html {
 
 footer ion-icon {
   font-size: 26px;
+}
+
+.send-button {
+  cursor: pointer;
 }
 
 .menu-container {
