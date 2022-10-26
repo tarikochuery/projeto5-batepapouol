@@ -1,5 +1,7 @@
 const BASE_URL = 'https://mock-api.driven.com.br/api/v6/uol';
 let user = ''; 3;
+const BAD_REQUEST = 400
+const OK_REQUEST = 200
 
 
 const getMessages = async () => {
@@ -10,11 +12,6 @@ const getMessages = async () => {
   } catch (error) {
     console.log(error);
   }
-};
-
-const reloadMessages = () => {
-  const reloadInterval = setInterval(getMessages, 3000);
-  return reloadInterval;
 };
 
 const login = async () => {
@@ -31,7 +28,7 @@ const login = async () => {
       alert('Este nome já está em uso, tente outro nome.');
       loginStatus = status;
     }
-  } while (loginStatus === 400);
+  } while (loginStatus === BAD_REQUEST);
 
 };
 
