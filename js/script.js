@@ -293,6 +293,7 @@ const handleLoginClick = async () => {
     loading.classList.add('hide')
   } else {
     loginContainer.classList.add('hide')
+    setInterval(keepConnection, 5000);
   }
 }
 
@@ -300,10 +301,9 @@ const handleLoginClick = async () => {
 
 printMessages();
 renderParticipants();
-const connectionInterval = setInterval(keepConnection, 5000);
 
-const reloadMessageTimer = setInterval(reloadMessages, 3000);
-const reloadParticipantsTimer = setInterval(renderParticipants, 10000);
+setInterval(reloadMessages, 3000);
+setInterval(renderParticipants, 10000);
 menuContainer.addEventListener('click', closeMenu);
 
 //FIXME: Acertar toggle do menu lateral
