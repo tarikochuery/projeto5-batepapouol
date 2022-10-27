@@ -146,16 +146,10 @@ nav.menu {
   text-align: center;
   font-size: 18px;
   font-weight: 700;
-  transition: 0.5s;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
-}
-
-.menu-header p {
-  width: 100%;
   overflow-x: hidden;
 }
 
@@ -170,6 +164,11 @@ nav.menu {
   display: flex;
   gap: 7px;
   align-items: center;
+  cursor: pointer;
+}
+
+.menu ul ion-icon {
+  font-size: 20px;
 }
 
 .menu ul .checkmark {
@@ -185,6 +184,7 @@ nav.menu {
   font-weight: 700;
   font-size: 18px;
   padding: 33px 0;
+  width: 100%;
 }
 
 .no-show {
