@@ -5,6 +5,7 @@ const OK_REQUEST = 200;
 let loginStatus;
 let messages = [];
 let selectedContact;
+let isVisible = true
 const menuContainer = document.querySelector('.menu-container');
 const menu = document.querySelector('.menu');
 const messagesContainer = document.querySelector('.messages');
@@ -106,6 +107,21 @@ const checkParticipant = (element) => {
   `
 }
 
+const checkVisibility = (element) => {
+  const selectedVisibility = document.querySelector('.visibility-menu .selected')
+
+  selectedVisibility.classList.remove('selected')
+  selectedVisibility.querySelector('.checkmark').remove()
+
+  isVisible = !element.classList.contains('private')
+  element.classList.add('selected')
+  element.innerHTML += `
+    <div class="checkmark">
+      <ion-icon name="checkmark"></ion-icon>
+    </div>
+  `
+}
+
 // Interface Action Functions -----------------------------------------
 const openMenu = () => {
   menuContainer.classList.remove('no-show');
@@ -122,8 +138,15 @@ const closeMenu = (event) => {
 
 const selectParticipant = (element) => {
   checkParticipant(element)
-  const sendToElement = document.querySelector('.message-status')
+  const sendToElement = document.querySelector('.to')
   sendToElement.innerHTML = `Enviando para ${selectedContact}`
+}
+
+const selectVisibility = (element) => {
+  checkVisibility(element)
+  const sendToElement = document.querySelector('.visibility')
+  const visibility = isVisible ? '' : '(Reservadamente)'
+  sendToElement.innerHTML = visibility
 }
 
 // Interface Action Funtions END --------------------------------------
@@ -155,14 +178,19 @@ const createParticipantHTML = (participant) => {
 
 const renderParticipants = async () => {
   const participants = await getParticipants();
+  const isSelectedPariticpantAll = selectedContact === 'Todos'
+  const checkmark = `<div class="checkmark">
+  <ion-icon name="checkmark"></ion-icon>
+</div>`
   const participantsList = document.querySelector('.contacts');
   const participantsHTML = participants
     .map(participant => createParticipantHTML(participant));
 
   participantsList.innerHTML = `
-  <div class="category Todos">
+  <div class="category Todos" onclick="selectParticipant(this)">
     <ion-icon name="people"></ion-icon>
     <p>Todos</p>
+    ${isSelectedPariticpantAll ? checkmark : ''}
   </div>
   ${participantsHTML.join(' ')}
   `;
@@ -192,8 +220,8 @@ const filterMessages = () => {
   return messages.filter(message => {
     const isPrivate = message.type === 'private_message';
     if (isPrivate) {
-      const messageToUser = message.to === user || message.to === 'Todos';
-      return messageToUser;
+      const isMessageToOrFromUser = message.to === user || message.to === 'Todos' || message.from === user;
+      return isMessageToOrFromUser;
     }
     return true;
   });
@@ -232,9 +260,10 @@ const handleSendClick = async () => {
   const input = messageInput.value;
   if (!input) return;
 
+  const visibility = isVisible ? 'message' : 'private_message'
   const to = selectedContact || 'Todos'
 
-  const messageStatus = await sendMessage(to, input);
+  const messageStatus = await sendMessage(to, input, visibility);
 
   if (messageStatus === OK_REQUEST) {
     messageInput.value = '';

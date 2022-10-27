@@ -31,7 +31,10 @@
     <footer class="footer">
       <div class="message-field">
         <input type="text" placeholder="Escreva aqui...">
-        <p class="message-status"></p>
+        <p class="message-status">
+          <span class="to"></span>
+          <span class="visibility"></span>
+        </p>
       </div>
       <div class="send-button" onclick="handleSendClick()">
         <ion-icon name="paper-plane-outline"></ion-icon>
@@ -51,16 +54,16 @@
       <p>Escolha a Visibilidade:</p>
 
       <ul class="visibility-menu">
-        <li class="visibility-item">
+        <li class="visibility-item selected" onclick="selectVisibility(this)">
           <ion-icon name="lock-open"></ion-icon>
           <p>Público</p>
-        </li>
-        <li class="visibility-item">
-          <ion-icon name="lock-closed"></ion-icon>
-          <p>Reservadamente</p>
           <div class="checkmark">
             <ion-icon name="checkmark"></ion-icon>
           </div>
+        </li>
+        <li class="visibility-item private" onclick="selectVisibility(this)">
+          <ion-icon name="lock-closed"></ion-icon>
+          <p>Reservadamente</p>
         </li>
       </ul>
     </nav>
