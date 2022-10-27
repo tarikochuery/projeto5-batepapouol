@@ -2,7 +2,6 @@ const BASE_URL = 'https://mock-api.driven.com.br/api/v6/uol';
 let user = ''; 3;
 const BAD_REQUEST = 400;
 const OK_REQUEST = 200;
-let loginStatus;
 let messages = [];
 let selectedContact;
 let isVisible = true
@@ -36,20 +35,17 @@ const getParticipants = async () => {
 };
 
 const login = async () => {
-  let loginStatus;
-  do {
-    user = prompt('Qual seu lindo nome?');
     try {
       const res = await axios.post(`${BASE_URL}/participants`, { name: user });
       const status = res.status;
-      loginStatus = status;
+      return status;
     } catch (error) {
       const res = error.response;
       const status = res.status;
       alert('Este nome já está em uso, tente outro nome.');
-      loginStatus = status;
+      return status;
     }
-  } while (loginStatus === BAD_REQUEST);
+
 
 };
 
@@ -158,7 +154,7 @@ const createParticipantHTML = (participant) => {
   const isSelectedParticipant = name === selectedContact
 
   if (isSelectedParticipant) {
-    const participantHTML = `<li class="contact selected" onclick="selectParticipant(this)">
+    const participantHTML = `<li class="contact selected" onclick="selectParticipant(this)" data-identifier="participant">
     <ion-icon name="person-circle"></ion-icon>
     <p>${name}</p>
     <div class="checkmark">
@@ -278,10 +274,31 @@ const handleSendClick = async () => {
   }
 };
 
+const handleLoginClick = async () => {
+  const loginInput = document.querySelector('.login-input')
+  if (!loginInput) return
+
+  const loginContainer = document.querySelector('.login')
+  const loginForm = document.querySelector('.login-form')
+  const loading = document.querySelector('.loading')
+  user = loginInput.value
+  loginForm.classList.add('hide')
+  loading.classList.remove('hide')
+  const loginStatus = await login()
+
+  if (loginStatus === BAD_REQUEST) {
+    loginForm.classList.remove('hide')
+    loginInput.value = ''
+    user = ''
+    loading.classList.add('hide')
+  } else {
+    loginContainer.classList.add('hide')
+  }
+}
+
 // CODE START --------------------------------------------------------
 
 printMessages();
-login();
 renderParticipants();
 const connectionInterval = setInterval(keepConnection, 5000);
 
@@ -289,6 +306,4 @@ const reloadMessageTimer = setInterval(reloadMessages, 3000);
 const reloadParticipantsTimer = setInterval(renderParticipants, 10000);
 menuContainer.addEventListener('click', closeMenu);
 
-//TODO: Criar check para tipo de mensagem
-//TODO: Configurar envio de mensagem privada
 //FIXME: Acertar toggle do menu lateral

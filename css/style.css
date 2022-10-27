@@ -195,3 +195,60 @@ nav.menu {
 .menu.slide {
   width: 259px
 }
+
+.login {
+  width: 100%;
+  max-width: 385px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #ffffff;
+  padding: 72px 57px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 94px;
+}
+
+.login-header {
+  width: 130px;
+}
+
+.login-header img {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.login-input {
+  width: 261px;
+  height: 54px;
+  text-align: center;
+  border: 1px solid #d7d7d7;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.login-button {
+  width: 109px;
+  height: 45px;
+  color: #696969;
+  border-radius: 9px;
+  border: none;
+}
+
+.hide {
+  display: none;
+}
+
+
+
