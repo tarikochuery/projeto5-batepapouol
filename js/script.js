@@ -50,7 +50,7 @@ const keepConnection = async () => {
     return postStatus;
   } catch (error) {
     const errorResponse = error.response;
-    const postStatus = errorResponse.status;
+    const postStatus = errorResponse?.status;
     return postStatus;
   }
 };
@@ -79,6 +79,14 @@ const openMenu = () => {
   menu.classList.add('slide');
 };
 
+const closeMenu = (event) => {
+  const isOutside = !event.target.closest('.menu')
+  if(isOutside) {
+    menuContainer.classList.add('no-show')
+    menu.classList.remove('slide')
+  }
+}
+
 const createMessageHTML = (time, from, to, type, text) => {
   let messageHTML;
 
@@ -95,6 +103,17 @@ const createMessageHTML = (time, from, to, type, text) => {
   return messageHTML
 };
 
+const filterMessages = () => {
+  return messages.filter(message => {
+    const isPrivate = message.type === 'private_message'
+    if(isPrivate) {
+      const messageToUser = message.to === user || message.to === 'Todos'
+      return messageToUser
+    }
+    return true
+  })
+}
+
 const ScrollToLastMessage = () => {
   const lastMessageElement = document.querySelector('.message:last-child')
   lastMessageElement.scrollIntoView()
@@ -102,7 +121,8 @@ const ScrollToLastMessage = () => {
 
 const printMessages = async () => {
   messages = await getMessages();
-  const messagesHTML = messages.map(message => {
+  const filteredMessages = filterMessages()
+  const messagesHTML = filteredMessages.map(message => {
     const {from, to, text, type, time} = message
     const messageHTML = createMessageHTML(time, from, to, type, text)
     return messageHTML
@@ -120,15 +140,6 @@ const reloadMessages = async () => {
   }
   printMessages();
 }
-
-login();
-const connectionInterval = setInterval(keepConnection, 5000);
-
-printMessages()
-const reloadMessageTimer = setInterval(reloadMessages, 3000)
-
-
-
 
 const handleSendClick = async () => {
   const input = messageInput.value
@@ -149,5 +160,9 @@ const handleSendClick = async () => {
   }
 }
 
-//FIXME: Alterar a estrutura async await para cadeia .then (Perguntar para Isa)
-//TODO: Filtrar mensagens para aparecer apenas para todos e para o usuário.
+printMessages()
+login();
+const connectionInterval = setInterval(keepConnection, 5000);
+
+const reloadMessageTimer = setInterval(reloadMessages, 3000)
+menuContainer.addEventListener('click', closeMenu)
