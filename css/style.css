@@ -132,7 +132,12 @@ footer ion-icon {
 }
 
 nav.menu {
+  position:fixed;
+  right: calc(50% - 189px);
+  top: 0;
+  z-index: 1;
   width: 0;
+  height: 100vh;
   overflow-x: hidden;
   background-color: #ffffff;
   padding-left: 20px;
