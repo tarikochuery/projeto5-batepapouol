@@ -141,6 +141,7 @@ nav.menu {
   overflow-x: hidden;
   background-color: #ffffff;
   padding-left: 20px;
+  opacity: 0;
 
   transition: width 2s;
 }
@@ -163,6 +164,9 @@ nav.menu {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  max-height: 800px;
+  overflow-y: scroll;
+  line-break: anywhere;
 }
 
 .menu ul * {
@@ -198,7 +202,8 @@ nav.menu {
 }
 
 .menu.slide {
-  width: 259px
+  width: 259px;
+  opacity: 1;
 }
 
 .login {
