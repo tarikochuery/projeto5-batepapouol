@@ -250,7 +250,9 @@ const reloadMessages = async () => {
   printMessages();
 };
 
-// Messages Render Functions END ---------------------------------------
+// Messages Render Functions END -----------------------------------------------------------
+
+// Handlers Functions ----------------------------------------------------------------------
 
 const handleSendClick = async () => {
   const input = messageInput.value;
@@ -297,6 +299,13 @@ const handleLoginClick = async () => {
   }
 }
 
+const handleEnterPush = (event) => {
+  const isEnterPushed = event.key === 'Enter'
+  isEnterPushed && handleSendClick()
+}
+
+// Handlers Functions END ----------------------------------------------------------------------
+
 // CODE START --------------------------------------------------------
 
 printMessages();
@@ -305,5 +314,4 @@ renderParticipants();
 setInterval(reloadMessages, 3000);
 setInterval(renderParticipants, 10000);
 menuContainer.addEventListener('click', closeMenu);
-
-//FIXME: Acertar toggle do menu lateral
+window.addEventListener('keydown', handleEnterPush)
