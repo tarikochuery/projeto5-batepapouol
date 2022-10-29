@@ -1,5 +1,5 @@
 const BASE_URL = 'https://mock-api.driven.com.br/api/v6/uol';
-let user = ''; 3;
+let user = '';
 const BAD_REQUEST = 400;
 const OK_REQUEST = 200;
 let messages = [];
