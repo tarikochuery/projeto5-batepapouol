@@ -97,7 +97,7 @@ const checkParticipant = (element) => {
   selectedContact = element.lastElementChild.innerHTML
   element.classList.add('selected')
   element.innerHTML += `
-    <div class="checkmark">
+    <div class="checkmark" data-test="check">
       <ion-icon name="checkmark"></ion-icon>
     </div>
   `
@@ -154,7 +154,7 @@ const createParticipantHTML = (participant) => {
   const isSelectedParticipant = name === selectedContact
 
   if (isSelectedParticipant) {
-    const participantHTML = `<li class="contact selected" onclick="selectParticipant(this)" data-identifier="participant">
+    const participantHTML = `<li data-test="participant" class="contact selected" onclick="selectParticipant(this)" data-identifier="participant">
     <ion-icon name="person-circle"></ion-icon>
     <p>${name}</p>
     <div class="checkmark">
@@ -164,7 +164,7 @@ const createParticipantHTML = (participant) => {
     
     return participantHTML
   }
-  const participantHTML = `<li class="contact" onclick="selectParticipant(this)">
+  const participantHTML = `<li data-test="participant" class="contact" onclick="selectParticipant(this)">
     <ion-icon name="person-circle"></ion-icon>
     <p>${name}</p>
   </li>`;
@@ -183,7 +183,7 @@ const renderParticipants = async () => {
     .map(participant => createParticipantHTML(participant));
 
   participantsList.innerHTML = `
-  <div class="category Todos" onclick="selectParticipant(this)">
+  <div data-test="all" class="category Todos" onclick="selectParticipant(this)">
     <ion-icon name="people"></ion-icon>
     <p>Todos</p>
     ${isSelectedPariticpantAll ? checkmark : ''}
@@ -200,11 +200,11 @@ const createMessageHTML = (time, from, to, type, text) => {
   let messageHTML;
 
   if (type === 'status') {
-    messageHTML = `<div class="message ${type}">
+    messageHTML = `<div data-test="message" class="message ${type}">
     <p><span class="time">(${time})</span> <span class="name">${from}</span> ${text}</p>
     </div>`;
   } else {
-    messageHTML = `<div class="message ${type === 'message' ? '' : type}">
+    messageHTML = `<div data-test="message" class="message ${type === 'message' ? '' : type}">
     <p><span class="time">(${time})</span> <span class="name">${from}</span> para <span class="name">${to}</span>: ${text}</p>
     </div>`;
   }

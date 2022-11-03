@@ -20,7 +20,7 @@
   <div class="container">
     <header class="header">
       <img src="./assets/logo.png" alt="Logo Bate-Papo UOL">
-      <div class="menu-button" onclick="openMenu()">
+      <div data-test="open-participants" class="menu-button" onclick="openMenu()">
         <ion-icon name="people"></ion-icon>
       </div>
     </header>
@@ -31,13 +31,13 @@
 
     <footer class="footer">
       <div class="message-field">
-        <input type="text" placeholder="Escreva aqui...">
-        <p class="message-status">
+        <input data-test="input-message" type="text" placeholder="Escreva aqui...">
+        <div data-test="recipient " class="message-status">
           <span class="to"></span>
           <span class="visibility"></span>
-        </p>
+        </div>
       </div>
-      <div class="send-button" onclick="handleSendClick()">
+      <div data-test="send-message" class="send-button" onclick="handleSendClick()">
         <ion-icon name="paper-plane-outline"></ion-icon>
       </div>
     </footer>
@@ -56,14 +56,14 @@
     <p>Escolha a Visibilidade:</p>
 
     <ul class="visibility-menu">
-      <li class="visibility-item selected" onclick="selectVisibility(this)" data-identifier="visibility">
+      <li data-test="public" class="visibility-item selected" onclick="selectVisibility(this)" data-identifier="visibility">
         <ion-icon name="lock-open"></ion-icon>
         <p>Público</p>
         <div class="checkmark">
-          <ion-icon name="checkmark"></ion-icon>
+          <ion-icon data-test="check" name="checkmark"></ion-icon>
         </div>
       </li>
-      <li class="visibility-item private" onclick="selectVisibility(this)" data-identifier="visibility">
+      <li data-test="private" class="visibility-item private" onclick="selectVisibility(this)" data-identifier="visibility">
         <ion-icon name="lock-closed"></ion-icon>
         <p>Reservadamente</p>
       </li>
@@ -75,8 +75,8 @@
       <img src="./assets/logo.png" alt="Bate-Papo UOL Logo">
     </div>
     <div class="form login-form">
-      <input type="text" class="login-input" placeholder="Digite seu lindo nome">
-      <button class="login-button" onclick="handleLoginClick()">Entrar</button>
+      <input data-test="input-name" type="text" class="login-input" placeholder="Digite seu lindo nome">
+      <button data-test="send-name" class="login-button" onclick="handleLoginClick()">Entrar</button>
     </div>
     <div class="loading form hide">
       <img src="./assets/Loading_icon.gif">
